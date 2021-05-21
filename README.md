@@ -1,0 +1,1 @@
+<html><body>You are being <a href="https://raw.githubusercontent.com/linuxkettle/AppShop/main/README.md">redirected</a>.</body></html>
