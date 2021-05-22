@@ -7,114 +7,330 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>550</height>
+    <height>543</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>helloShop</string>
+   <string>App Shop</string>
   </property>
   <property name="windowIcon">
    <iconset theme="gnome-app-install">
     <normaloff>../../.designer/backup</normaloff>../../.designer/backup</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
+  <widget class="QWidget" name="Window">
+   <widget class="QLineEdit" name="Search">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
       <width>1000</width>
-      <height>506</height>
+      <height>22</height>
      </rect>
     </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-      <horstretch>255</horstretch>
-      <verstretch>255</verstretch>
-     </sizepolicy>
+    <property name="placeholderText">
+     <string>Search apps</string>
     </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <property name="tabsClosable">
+    <property name="clearButtonEnabled">
      <bool>false</bool>
     </property>
-    <widget class="QWidget" name="browse">
-     <attribute name="title">
-      <string>Browse</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBox">
+   </widget>
+   <widget class="QFrame" name="Home">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>23</y>
+      <width>1000</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="midLineWidth">
+     <number>0</number>
+    </property>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>3</x>
+       <y>3</y>
+       <width>994</width>
+       <height>250</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: qlineargradient(spread:pad, stop: 0 rgb(171, 181, 245), stop: 1 rgb(191, 125, 250), x1:0, y1:0, x2:1, y2:0,);</string>
+     </property>
+     <widget class="QFrame" name="FeaturedApp">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>996</width>
-        <height>221</height>
+        <width>994</width>
+        <height>250</height>
        </rect>
       </property>
-      <property name="title">
-       <string/>
-      </property>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QLabel" name="Image">
        <property name="geometry">
         <rect>
-         <x>1</x>
-         <y>88</y>
-         <width>32</width>
-         <height>32</height>
+         <x>2</x>
+         <y>0</y>
+         <width>990</width>
+         <height>250</height>
         </rect>
        </property>
-       <property name="styleSheet">
-        <string notr="true">color: transparent; background-color: transparent; border: transparent;</string>
+       <property name="pixmap">
+        <pixmap>../../../../Applications/Falkon.app/Resources/Falkon.png</pixmap>
        </property>
-       <property name="icon">
-        <iconset theme="go-previous-symbolic"/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
+       <property name="scaledContents">
+        <bool>false</bool>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>963</x>
-         <y>88</y>
-         <width>32</width>
-         <height>32</height>
+         <x>140</x>
+         <y>10</y>
+         <width>351</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>24</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: transparent;
+font-size: 24pt;
+font-weight: bold;</string>
+       </property>
+       <property name="text">
+        <string>Falkon</string>
+       </property>
+      </widget>
+      <widget class="QTextBrowser" name="textBrowser">
+       <property name="geometry">
+        <rect>
+         <x>139</x>
+         <y>54</y>
+         <width>851</width>
+         <height>192</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: transparent; background-color: transparent; border: transparent;</string>
+        <string notr="true">background: transparent;</string>
        </property>
-       <property name="icon">
-        <iconset theme="go-next-symbolic"/>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
        </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Nimbus Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;A simple, fast, Qt-based web browser that protects your privacy.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Curator Message:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Falkon does not work with GMail and other Google products. For that, we recommend using the Thunderbird email client, which is fast and easy to use.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="installed">
-     <attribute name="title">
-      <string>Installed</string>
-     </attribute>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>3</x>
+       <y>256</y>
+       <width>991</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Browse our apps by category</string>
+     </property>
     </widget>
-    <widget class="QWidget" name="updates">
-     <attribute name="title">
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>3</x>
+       <y>276</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Music &amp;&amp; Audio</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>336</x>
+       <y>276</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Programming</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>669</x>
+       <y>276</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Graphics &amp;&amp; Film</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>3</x>
+       <y>303</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Office &amp;&amp; Productivity</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>336</x>
+       <y>303</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Utilities &amp;&amp; Tools</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="geometry">
+      <rect>
+       <x>669</x>
+       <y>303</y>
+       <width>331</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Games</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>319</x>
+      <y>497</y>
+      <width>180</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>180</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Sans Serif</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Browse Apps</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>501</x>
+      <y>497</y>
+      <width>180</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>180</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Sans Serif</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
       <string>Updates</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="search">
-     <attribute name="title">
-      <string>Search</string>
-     </attribute>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </widget>
   </widget>
@@ -127,37 +343,49 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuhelloShop">
+   <widget class="QMenu" name="AppMenu">
     <property name="title">
-     <string>helloShop</string>
+     <string>App Shop</string>
     </property>
-    <addaction name="actionSettings"/>
-    <addaction name="actionRefresh_App_List"/>
+    <addaction name="A_Settings"/>
+    <addaction name="A_Refresh"/>
     <addaction name="separator"/>
-    <addaction name="actionAbout"/>
-    <addaction name="actionQuit"/>
+    <addaction name="A_Browse"/>
+    <addaction name="A_Updates"/>
+    <addaction name="separator"/>
+    <addaction name="A_About"/>
+    <addaction name="A_Quit"/>
    </widget>
-   <addaction name="menuhelloShop"/>
+   <addaction name="AppMenu"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionSettings">
+  <action name="A_Settings">
    <property name="text">
     <string>Settings</string>
    </property>
   </action>
-  <action name="actionRefresh_App_List">
+  <action name="A_Refresh">
    <property name="text">
     <string>Refresh App List</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="A_About">
    <property name="text">
     <string>About</string>
    </property>
   </action>
-  <action name="actionQuit">
+  <action name="A_Quit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="A_Browse">
+   <property name="text">
+    <string>Browse</string>
+   </property>
+  </action>
+  <action name="A_Updates">
+   <property name="text">
+    <string>Updates</string>
    </property>
   </action>
  </widget>

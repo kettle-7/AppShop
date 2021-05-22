@@ -2,13 +2,12 @@
 import sys
 import os
 
-
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QFile
 from PyQt5 import uic
 
 
-class StoreWindow(QWidget):
+class StoreWindow(QMainWindow):
     def __init__(self):
         super(StoreWindow, self).__init__()
         self.load_ui()
@@ -19,6 +18,7 @@ class StoreWindow(QWidget):
         ui_file.open(QFile.ReadOnly)
         uic.loadUi(ui_file, self)
         ui_file.close()
+
 
 if __name__ == "__main__":
     app = QApplication([])
