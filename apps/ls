@@ -1,0 +1,9 @@
+# This file contains a list of subfiles and subfolders in the current directory.
+# The syntax is simple: the first letter is a type, like d for directory, a for
+# app, or m for a metadata file. In each subfolder, there is expected to be a
+# file like this.
+
+# The directory format is like this:
+# Text for the    | The name of the folder,
+# category button | here and in ~/Applications
+d "Graphics & Film" Graphics

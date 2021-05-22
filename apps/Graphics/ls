@@ -1,0 +1,4 @@
+# The main part of this format is explained in ../ls, but here's the
+# app-specific syntax:
+# Name      | Meta Filename
+a KolourPaint KolourPaint.meta
