@@ -79,7 +79,7 @@
         <height>250</height>
        </rect>
       </property>
-      <widget class="QLabel" name="Image">
+      <widget class="QLabel" name="F_Background">
        <property name="geometry">
         <rect>
          <x>2</x>
@@ -95,7 +95,7 @@
         <bool>false</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="F_Title">
        <property name="geometry">
         <rect>
          <x>140</x>
@@ -120,7 +120,7 @@ font-weight: bold;</string>
         <string>Falkon</string>
        </property>
       </widget>
-      <widget class="QTextBrowser" name="textBrowser">
+      <widget class="QTextBrowser" name="F_Description">
        <property name="geometry">
         <rect>
          <x>139</x>
@@ -148,7 +148,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </widget>
     </widget>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="T_Categories">
      <property name="geometry">
       <rect>
        <x>3</x>
@@ -168,7 +168,7 @@ p, li { white-space: pre-wrap; }
       <string>Browse our apps by category</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="C_Audio">
      <property name="geometry">
       <rect>
        <x>3</x>
@@ -181,7 +181,7 @@ p, li { white-space: pre-wrap; }
       <string>Music &amp;&amp; Audio</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="C_Developer">
      <property name="geometry">
       <rect>
        <x>336</x>
@@ -194,7 +194,7 @@ p, li { white-space: pre-wrap; }
       <string>Programming</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="C_Graphics">
      <property name="geometry">
       <rect>
        <x>669</x>
@@ -207,7 +207,7 @@ p, li { white-space: pre-wrap; }
       <string>Graphics &amp;&amp; Film</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_4">
+    <widget class="QPushButton" name="C_Office">
      <property name="geometry">
       <rect>
        <x>3</x>
@@ -220,7 +220,7 @@ p, li { white-space: pre-wrap; }
       <string>Office &amp;&amp; Productivity</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_5">
+    <widget class="QPushButton" name="C_Utilities">
      <property name="geometry">
       <rect>
        <x>336</x>
@@ -233,7 +233,7 @@ p, li { white-space: pre-wrap; }
       <string>Utilities &amp;&amp; Tools</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_6">
+    <widget class="QPushButton" name="C_Games">
      <property name="geometry">
       <rect>
        <x>669</x>
@@ -247,7 +247,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="F_Browse">
     <property name="geometry">
      <rect>
       <x>319</x>
@@ -265,7 +265,7 @@ p, li { white-space: pre-wrap; }
     <property name="lineWidth">
      <number>2</number>
     </property>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="B_Browse">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -290,7 +290,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="F_Updates">
     <property name="geometry">
      <rect>
       <x>501</x>
@@ -308,7 +308,7 @@ p, li { white-space: pre-wrap; }
     <property name="lineWidth">
      <number>2</number>
     </property>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="B_Updates">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -390,5 +390,22 @@ p, li { white-space: pre-wrap; }
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>A_Quit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
