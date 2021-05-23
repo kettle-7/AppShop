@@ -2,7 +2,7 @@
 .idea/
 
 # Qt Creator shit
-main.pyproject.user
+CMakeLists.txt.user
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
