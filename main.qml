@@ -1,3 +1,4 @@
+import io.github.linuxkettle.AppShop 0.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
@@ -6,18 +7,129 @@ import QtQuick 2.12
 //import "fs.js" as FileIO
 
 Window {
-    function readData() {
-        var dirTree = {type: "d", name: "root", path: "/", fName: null, children: []};
-        var xhr = new XMLHttpRequest;
-        xhr.open("GET", "https://raw.githubusercontent.com/linuxkettle/AppShop/apps/ls");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-                var response = xhr.responseText;
-                console.log(response)
-                // use file contents as required
+    property Curler cr: Curler {}
+    function parse(response, path="https://raw.githubusercontent.com/linuxkettle/AppShop/apps") {
+        /******************************************************************************************************************
+        * Minimal implementation of a basic programming language I made a while ago for data storage and simple programs. *
+        ******************************************************************************************************************/
+        var data = {
+            name: "<anonymous>",
+            subtrees: [],
+            apps: [],
+            value: "<empty>",
+            extra: [],
+            fields: []
+        }
+        var lines = response.split('\n')
+        var e3 = false; // Have we encountered three equal signs, no by default.
+        var e3Name = "Description"; // Most common place for e3
+        var e3Value = ""; // An empty string. Useful for when you want a necklace without beads, or a chain without any links.
+        for (var line in lines) {
+            var ln = lines[line];
+            if (e3) {
+                if (ln === "===") {
+                    data.fields.push([e3Name, e3Value]);
+                    e3 = false;
+                    e3Value = "";
+                }
+                else {
+                    if (e3Value === "") {
+                        e3Value = ln
+                    }
+                    else {
+                        e3Value += ln + "\n"
+                    }
+                }
             }
-        };
-        xhr.send();
+            else if (!(ln === "" || ln[0] === "#")) {
+                var words = [];
+                var q = false
+                var w = ""
+                for (var cN in ln) {
+                    var c = ln[cN];
+                    if (c === '"') {
+                        if (q) {
+                            q = false;
+                        }
+                        else {
+                            q = true;
+                        }
+                    }
+                    else if (c === " ") {
+                        if (q) {
+                            w += " ";
+                        }
+                        else {
+                            words.push(w)
+                            w = "";
+                        }
+                    }
+                    else {
+                        w += c;
+                    }
+                }
+                if (w !== "") {
+                    words.push(w);
+                }
+                var com = words[0];
+                var args = [];
+                for (var i = 1; i < words.length; i++) {
+                    args.push(words[i]);
+                }
+                var R
+                switch(com) {
+                    case "d":
+                        R = cr.downloadFile(path + "/" + args[1] + "/ls");
+                        data.subtrees.push(parse(R, path + "/" + args[1]));
+                        break;
+                    case "a":
+                        R = cr.downloadFile(path + "/" + args[0] + ".meta");
+                        data.subtrees.push(parse(R, path));
+                        break;
+                    default:
+                        if (args.length !== 0) {
+                            if (args[0] === "===") {
+                                e3Name = com;
+                                e3Value = "";
+                                e3 = true;
+                            }
+                        }
+                        data.fields.push([com, args.join(" ")]);
+                        break;
+                }
+            }
+        }
+        return data;
+    }
+    function readData() {
+        var dirTree = {};
+        var R = cr.downloadFile("https://raw.githubusercontent.com/linuxkettle/AppShop/main/apps/ls");
+        dirTree = parse(R, "https://raw.githubusercontent.com/linuxkettle/AppShop/main/apps");
+        function printData(data, indent="") {
+            console.log(indent + "Data Structure:");
+            indent += "  ";
+            if (data.apps.length !== 0) {
+                console.log("Apps:")
+                for (var appN in data.apps) {
+                    var app = data.apps[appN];
+                    printData(app, indent + "  ")
+                }
+            }
+            if (data.fields.length !== 0) {
+                for (var fN in data.fields) {
+                    var f = data.fields[fN];
+                    console.log(f[0].toString() + ": " + f[1].toString())
+                }
+            }
+            if (data.subtrees.length !== 0) {
+                console.log("Subfolders:")
+                for (var treeN in data.subtrees) {
+                    var tree = data.subtrees[treeN];
+                    printData(tree, indent + "  ")
+                }
+            }
+        }
+        printData(dirTree)
     }
     id: win
     x: 50

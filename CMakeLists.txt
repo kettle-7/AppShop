@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(AppShop_QML LANGUAGES CXX)
+project(AppShop LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -31,22 +31,27 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
 set(TS_FILES lang/en_US.ts)
 
 if(ANDROID)
-    add_library(AppShop_QML SHARED
+    add_library(AppShop SHARED
       main.cpp
       qml.qrc
       ${TS_FILES}
     )
 else()
-    add_executable(AppShop_QML
+    add_executable(AppShop
       main.cpp
       qml.qrc
       ${TS_FILES}
     )
 endif()
 
-target_compile_definitions(AppShop_QML
+# Even though CLang++ throws -Wunused-flag, we need this for it to find libcurl.
+INCLUDE_DIRECTORIES ( . )
+set (CMAKE_CXX_FLAGS -L/usr/local/lib)
+
+target_compile_definitions(AppShop
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(AppShop_QML
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+link_directories(/usr/local/lib)
+target_link_libraries(AppShop
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick curl)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

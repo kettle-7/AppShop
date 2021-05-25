@@ -1,3 +1,20 @@
-# Basic syntax a bit like INI files, desktop files or Systemd units
-Name=KolourPaint
-Icon=KolourPaint.png
+# First word is the property name, every word after is the value.
+Name KolourPaint
+Icon KolourPaint.png
+Version 20.12.3
+Summary KolourPaint is a simple painting program to quickly create raster images. It is useful as a touch-up tool and simple image editing tasks.
+# Continues until the next three equal signs
+Description ===
+<img src="https://kde.org/images/screenshots/kolourpaint.png" alt="KolourPaint"/>
+<p>KolourPaint is a simple painting program to quickly create raster images. It is useful as a touch-up tool and simple image editing tasks.</p>
+<h3>Features:</h3>
+<ul>
+	<li>Support for drawing various shapes - lines, rectangles, rounded rectangles, ovals and polygons</li>
+	<li>Curves, lines and text</li>
+	<li>Colour picker</li>
+	<li>Selections</li>
+	<li>Rotation, monochrome and other advanced effects</li>
+</ul>
+
+<p>For more information see the <a href="http://www.kolourpaint.org/">project website</a>.
+===
