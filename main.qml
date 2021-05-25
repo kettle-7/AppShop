@@ -18,7 +18,8 @@ Window {
             apps: [],
             value: "<empty>",
             extra: [],
-            fields: []
+            fields: [],
+            path: path
         }
         var lines = response.split('\n')
         var e3 = false; // Have we encountered three equal signs, no by default.
@@ -84,7 +85,7 @@ Window {
                         break;
                     case "a":
                         R = cr.downloadFile(path + "/" + args[0] + ".meta");
-                        data.subtrees.push(parse(R, path));
+                        data.apps.push(parse(R, path));
                         break;
                     default:
                         if (args.length !== 0) {
@@ -94,7 +95,7 @@ Window {
                                 e3 = true;
                             }
                         }
-                        data.fields.push([com, args.join(" ")]);
+                        else data.fields.push([com, args.join(" ")]);
                         break;
                 }
             }
@@ -106,10 +107,10 @@ Window {
         var R = cr.downloadFile("https://raw.githubusercontent.com/linuxkettle/AppShop/main/apps/ls");
         dirTree = parse(R, "https://raw.githubusercontent.com/linuxkettle/AppShop/main/apps");
         function printData(data, indent="") {
-            console.log(indent + "Data Structure:");
+            console.log(indent + "Data Structure at "+data.path+":");
             indent += "  ";
             if (data.apps.length !== 0) {
-                console.log("Apps:")
+                console.log(indent + "Apps:")
                 for (var appN in data.apps) {
                     var app = data.apps[appN];
                     printData(app, indent + "  ")
@@ -118,11 +119,11 @@ Window {
             if (data.fields.length !== 0) {
                 for (var fN in data.fields) {
                     var f = data.fields[fN];
-                    console.log(f[0].toString() + ": " + f[1].toString())
+                    console.log(indent + f[0].toString() + ": " + f[1].toString())
                 }
             }
             if (data.subtrees.length !== 0) {
-                console.log("Subfolders:")
+                console.log(indent + "Subfolders:")
                 for (var treeN in data.subtrees) {
                     var tree = data.subtrees[treeN];
                     printData(tree, indent + "  ")
