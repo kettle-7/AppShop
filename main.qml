@@ -94,26 +94,26 @@ Window {
                                 e3Value = "";
                                 e3 = true;
                             }
+                            else data.fields.push([com, args.join(" ")]);
                         }
-                        else data.fields.push([com, args.join(" ")]);
                         break;
                 }
             }
         }
         return data;
     }
-    function readData() {
+    function startUp() {
         var dirTree = {};
         var R = cr.downloadFile("https://raw.githubusercontent.com/linuxkettle/AppShop/main/apps/ls");
         dirTree = parse(R, "https://raw.githubusercontent.com/linuxkettle/AppShop/main/apps");
         function printData(data, indent="") {
             console.log(indent + "Data Structure at "+data.path+":");
-            indent += "  ";
+            indent += "| ";
             if (data.apps.length !== 0) {
                 console.log(indent + "Apps:")
                 for (var appN in data.apps) {
                     var app = data.apps[appN];
-                    printData(app, indent + "  ")
+                    printData(app, indent + "| ")
                 }
             }
             if (data.fields.length !== 0) {
@@ -126,7 +126,7 @@ Window {
                 console.log(indent + "Subfolders:")
                 for (var treeN in data.subtrees) {
                     var tree = data.subtrees[treeN];
-                    printData(tree, indent + "  ")
+                    printData(tree, indent + "| ")
                 }
             }
         }
@@ -139,7 +139,7 @@ Window {
     height: 550
     visible: true
     title: qsTr("App Shop")
-    onWindowTitleChanged: readData() // Seems to be the only way to run something on startup, am I missing something?
+    Component.onCompleted: startUp() // Seems to be the only way to run something on startup, am I missing something?
     AbstractButton {
         id: f_Browse
         x: win.width / 2 - 180//1
@@ -147,7 +147,13 @@ Window {
         width: 180
         height: 24
         padding: 0
-        onClicked: {home.visible = true; f_Browse.background.color = "#aaaaaa"; f_Updates.background.color = "#eeeeee"}
+        onClicked: {
+            home.visible = true
+            updates.visible = false
+            f_Browse.background.color = "#aaaaaa"
+            f_Updates.background.color = "#eeeeee"
+            win.title = "App Shop"
+        }
         background: Rectangle {
             color: "#aaaaaa"
             border.color: "#888888"
@@ -172,7 +178,13 @@ Window {
         width: 180
         height: 24
         padding: 0
-        onClicked: {home.visible = false; f_Browse.background.color = "#eeeeee"; f_Updates.background.color = "#aaaaaa"}
+        onClicked: {
+            home.visible = false
+            updates.visible = true
+            f_Browse.background.color = "#eeeeee"
+            f_Updates.background.color = "#aaaaaa"
+            win.title = "Software Updates"
+        }
         background: Rectangle {
             color: "#eeeeee"
             border.color: "#888888"
@@ -198,6 +210,32 @@ Window {
         width: win.width
         height: 22
         placeholderText: qsTr("Search apps")
+    }
+    Frame {
+        id: updates
+        visible: false
+        x: 1
+        y: 24
+        width: win.width - 2
+        height: win.height - search.height - f_Browse.height - 4
+        padding: 0
+        Text {
+            x: 1
+            y: 5
+            width: parent.width - 10
+            height: 50
+            text: "Coming Soon!"
+            font.pointSize: 24
+            font.bold: true
+        }
+        Text {
+            x: 5
+            y: 58
+            width: parent.width - 10
+            height: parent.height - 54
+            text: "Sorry, this functionaity is not yet in App Shop. Stay tuned!"
+            font.pointSize: 11
+        }
     }
     Frame {
         id: home
