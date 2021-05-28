@@ -4,6 +4,6 @@
 # file like this.
 
 # The directory format is like this:
-# Text for the    | The name of the folder,
-# category button | here and in ~/Applications
-d "Graphics & Film" Graphics
+# Text for the     | The name of the folder,
+# category button  | here and in ~/Applications
+d "Graphics && Film" Graphics

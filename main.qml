@@ -168,14 +168,25 @@ Window {
         var column = 0
         pointers = [[],[]]
         for (var catN in cats) {
-            function thing () {
-                var cat = cats[catN]
-                var btn = new Button()
-                btn.text = cat.Category
+            function thing () { // Make local variables local. I'm not sure if this is needed in JS but it's there anyway.
+                let cat = cats[catN]
+                let x = row
+                let btn = buttonComponent.createObject(catArea, {})
+                btn.text = cat.Category//.replace(/&/g, "&&")
                 btn.parent = catArea
                 btn.font.pointSize = 12
                 btn.visible = true
-                console.log([btn, btn.x, btn.y, btn.width, btn.height])
+                btn.y = 2
+                btn.width = Qt.binding(function() {
+                    return(Math.floor(catArea.width / columns) - 5)
+                })
+                btn.x = Qt.binding(function() {
+                    return(Math.floor(catArea.width / columns) * x) + 2
+                })
+                row += 1
+                if (row === 3) {
+                    row = 0
+                }
             }
             thing()
         }
@@ -189,6 +200,16 @@ Window {
     visible: true
     title: qsTr("App Shop")
     Component.onCompleted: startUp()
+    Component {
+        id: buttonComponent
+        RoundButton {
+            radius: 5
+            background: Rectangle {
+                color: "#eeeeee"
+                border.color: "#888888"
+            }
+        }
+    }
     AbstractButton {
         id: f_Browse
         x: win.width / 2 - 180//1
@@ -364,19 +385,22 @@ div>"
             verticalAlignment: Text.AlignVCenter
         }
         Frame {
+            id: catArea
+            padding: 0
             x: 2
             y: 274
             width: home.width - 4
             height: home.height - 276
-            GridLayout {
-                id: catArea
-                x: 0
-                y: 0
-                width: parent.width
-                height: parent.height
+            /*GridLayout {
+                //padding: 0
+                x: 2
+                y: 2
+                //alignment: "AlignLeft" | "AlignTop"
+                width: parent.width - 4
+                height: parent.height - 4
                 columns: 3
                 flow: GridLayout.LeftToRight
-            }
+            }*/
         }
     }
 }
