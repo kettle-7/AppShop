@@ -1,6 +1,8 @@
 import io.github.linuxkettle.AppShop 0.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.12
+//import QtQuick.Layouts 1.15
+import QtQuick.Layouts 1.12
 import QtQuick.Window 2.12
 import QtQuick 2.12
 
@@ -22,9 +24,9 @@ Window {
             path: path
         }
         var lines = response.split('\n')
-        var e3 = false; // Have we encountered three equal signs, no by default.
+        var e3 = false;             // Have we encountered three equal signs, no by default.
         var e3Name = "Description"; // Most common place for e3
-        var e3Value = ""; // An empty string. Useful for when you want a necklace without beads, or a chain without any links.
+        var e3Value = "";           // An empty string. Useful for when you want a necklace without beads, or a chain without any links.
         for (var line in lines) {
             var ln = lines[line];
             if (e3) {
@@ -81,7 +83,9 @@ Window {
                 switch(com) {
                     case "d":
                         R = cr.downloadFile(path + "/" + args[1] + "/ls");
-                        data.subtrees.push(parse(R, path + "/" + args[1]));
+                        var o = parse(R, path + "/" + args[1])
+                        o.category = args[0]
+                        data.subtrees.push(o);
                         break;
                     case "a":
                         R = cr.downloadFile(path + "/" + args[0] + ".meta");
@@ -130,8 +134,53 @@ Window {
                 }
             }
         }
-        printData(dirTree)
+        function getCategories(data) {
+            var cats = []
+            if (data.subtrees.length !== 0) {
+                for (var treeN in data.subtrees) {
+                    var tree = data.subtrees[treeN];
+                    var subCats = getCategories(tree)
+                    for (var subCatN in subCats) {
+                        cats.push(subCats[subCatN])
+                    }
+                }
+            }
+            if (data.category !== undefined && data.category.indexOf("lib_") === -1) {
+                cats.push({Category: data.category, Tree: data})
+            }
+            return cats
+        }
+        var cats = getCategories(dirTree)
+        var catnum = cats.length
+        var columns = 3
+        switch (0) {
+        case catnum % 3:
+            columns = 3
+            break
+        case catnum % 4:
+            columns = 4
+            break
+        case catnum % 2:
+            columns = 2
+            break
+        }
+        var row = 0
+        var column = 0
+        pointers = [[],[]]
+        for (var catN in cats) {
+            function thing () {
+                var cat = cats[catN]
+                var btn = new Button()
+                btn.text = cat.Category
+                btn.parent = catArea
+                btn.font.pointSize = 12
+                btn.visible = true
+                console.log([btn, btn.x, btn.y, btn.width, btn.height])
+            }
+            thing()
+        }
     }
+    property var pointers: [[],[]]
     id: win
     x: 50
     y: 50
@@ -139,7 +188,7 @@ Window {
     height: 550
     visible: true
     title: qsTr("App Shop")
-    Component.onCompleted: startUp() // Seems to be the only way to run something on startup, am I missing something?
+    Component.onCompleted: startUp()
     AbstractButton {
         id: f_Browse
         x: win.width / 2 - 180//1
@@ -319,6 +368,15 @@ div>"
             y: 274
             width: home.width - 4
             height: home.height - 276
+            GridLayout {
+                id: catArea
+                x: 0
+                y: 0
+                width: parent.width
+                height: parent.height
+                columns: 3
+                flow: GridLayout.LeftToRight
+            }
         }
     }
 }
