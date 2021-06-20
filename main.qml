@@ -166,12 +166,12 @@ Window {
         }
         var row = 0
         var column = 0
-        pointers = [[],[]]
+        this.pointers = [[],[]]
         for (var catN in cats) {
             function thing () { // Make local variables local. I'm not sure if this is needed in JS but it's there anyway.
                 let cat = cats[catN]
                 let x = row
-                let btn = buttonComponent.createObject(catArea, {})
+                let btn = categoryButton.createObject(catArea, {})
                 btn.text = cat.Category//.replace(/&/g, "&&")
                 btn.parent = catArea
                 btn.font.pointSize = 12
@@ -187,11 +187,46 @@ Window {
                 if (row === 3) {
                     row = 0
                 }
+                btn.onClicked.connect( function(){
+                    showCategory(cat)
+                })
             }
             thing()
         }
     }
-    property var pointers: [[],[]]
+    function showCategory(cat) {
+        f_Browse.background.color = "#eeeeee"
+        win.title = cat.Category + " | App Shop"
+        home.visible = false
+        updates.visible = false
+        categoryView.visible = true
+        while (appIcons.length > 0) {
+            let i = appIcons.pop()
+            i.destroy()
+        }
+        let data = cat.Tree
+        let apps = data.subApps
+        for (var C = 0; C < apps.length; C++) // No, QML!
+        {
+            let app = apps[C]
+            let acorn = appIconButton.createObject(categoryView, {})
+            appIcons.push(acorn)
+            let name = "Untitled App"
+            let version = "1.0"
+            let hci = false // Variable to check if the icon has been changed from default
+            for (var fN = 0; fN < app.fields.length; fN++) {
+                var f = app.fields[fN]
+                switch(f[0]) {
+                case "Icon":
+                    acorn.btnIcon.source = f[1]
+                    hci = true
+                }
+            }
+            if (!hci) acorn.btnIcon = QIcon.fromTheme("application-x-executable").pixmap(64, 64).toImage()
+        }
+    }
+    property var appIcons: []
+    property var pointers: []
     id: win
     x: 50
     y: 50
@@ -201,19 +236,24 @@ Window {
     title: qsTr("App Shop")
     Component.onCompleted: startUp()
     Component {
-        id: buttonComponent
+        id: categoryButton
         RoundButton {
             radius: 5
             background: Rectangle {
                 color: "#eeeeee"
-                border.color: "#888888"
+                border.color: "#888888" // FIXME: The border doesn't show rounded like it should. Bug?
             }
         }
     }
+    Component {
+        id: appIconButton
+        AppButton {}
+    }
+
     AbstractButton {
         id: f_Browse
         x: win.width / 2 - 180//1
-        y: win.height - height
+        y: win.height - height - 1
         width: 180
         height: 24
         padding: 0
@@ -244,7 +284,7 @@ Window {
     AbstractButton {
         id: f_Updates
         x: win.width / 2// + 1
-        y: win.height - height
+        y: win.height - height - 1
         width: 180
         height: 24
         padding: 0
@@ -303,9 +343,18 @@ Window {
             y: 58
             width: parent.width - 10
             height: parent.height - 54
-            text: "Sorry, this functionaity is not yet in App Shop. Stay tuned!"
+            text: "Sorry, this functionality is not yet in App Shop. Stay tuned!"
             font.pointSize: 11
         }
+    }
+    Frame {
+        id: categoryView
+        x: 1
+        y: 24
+        width: win.width - 2
+        height: win.height - search.height - f_Browse.height - 4
+        padding: 0
+        visible: false
     }
     Frame {
         id: home
@@ -391,16 +440,6 @@ div>"
             y: 274
             width: home.width - 4
             height: home.height - 276
-            /*GridLayout {
-                //padding: 0
-                x: 2
-                y: 2
-                //alignment: "AlignLeft" | "AlignTop"
-                width: parent.width - 4
-                height: parent.height - 4
-                columns: 3
-                flow: GridLayout.LeftToRight
-            }*/
         }
     }
 }
